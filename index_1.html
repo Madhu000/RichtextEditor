@@ -10,66 +10,75 @@ Text:<br>
 <br>
 <button type="button" onclick="myFunction()">SubMit</button>
 
-<h1 id="demo"></h1>
-<h2 id="demoone"></h2>
-<strong id="demotwo"></strong>
 <p id="demothree"></p>
 <script>
 
 function getString(data,symb,temp_n){
-  sub_string=[]
-  var indx =temp_n+1
-  for (m=indx; m<data.length; m++){
+  var indx=0;
+  var sub_string=[];
+  indx = (temp_n+1);
+  var new_symb='';
+  /*document.write("The value new temporary variable is ",temp_n);
+  document.write("The value new updated temporary variable is ",(temp_n+1));
+  document.write("The value of indx is",indx);*/
+  if (symb==='#'){
+	sub_string.push('<h1>');
+	new_symb= '</h1>';
+	}
+  else if(symb==='##'){
+	sub_string.push('<h2>');
+	new_symb= '</h2>';
+	}
+ else if(symb==='**'){
+	sub_string.push('<strong>');
+	new_symb= '</strong>';
+	}
+  for (var m=indx; m<data.length; m++){
     if (data[m]!=symb){
 	sub_string.push(data[m]);
 	}
     else if(data[m]===symb){
+	  sub_string.push(new_symb);
       break;
 	}
 	}
-	if (symb==='#'){
-	document.getElementById("demo").innerHTML=sub_string;
-	}
-	else if(symb==='##'){
-	document.getElementById("demoone").innerHTML=sub_string;
-	}
-	else if(symb==='**'){
-	document.getElementById("demotwo").innerHTML=sub_string;
-	}
-	return m+1
+	var new_text=sub_string.join(' ');
+	//document.write(m+1);
+	return [new_text,m+1];
  }
 
 function myFunction() {
   var symbol=[];
   var dict = { '#': 0, '##': 0, '**': 0 };
-  var count = 0;
   var x = document.getElementById("myTextarea").value;
   var y = x.split(" ");
+  var count=[]
+  count[1]=0;
+  var text='';
+  //document.write("The length of the string is ",y.length);
   for (var i=0; i<y.length; i++) {
   if (y[i] in dict){
   if (dict[y[i]]==0){
   dict[y[i]]=1;
   var temp=i;
-  if (symbol.length>0){
-  document.getElementById("demothree").innerHTML=symbol;
-  symbol=[];
-  }
-  count=getString(y,y[i],temp);
+  //document.write("The value of temporary value is ",temp);
+  var count=getString(y,y[i],temp);
+  symbol.push(count[0]);
   }
   else if(dict[y[i]]==1){
   dict[y[i]]=0;
   }
   }
-  else if(i<count){
+  else if(i<count[1]){
   continue;
   }
-  else if(i>=count){
+  else if(i>=count[1]){
   symbol.push(y[i]);
   }
   }
-  if (symbol.length>0){
-  document.getElementById("demothree").innerHTML=symbol;
-  }
+  var whole_text=symbol.join(' ');
+  //document.write(whole_text);
+  document.getElementById("demothree").innerHTML=whole_text;
   }
 </script>
 
