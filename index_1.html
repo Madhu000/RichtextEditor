@@ -57,7 +57,7 @@ function myFunction() {
   var text='';
   //document.write("The length of the string is ",y.length);
   for (var i=0; i<y.length; i++) {
-  if (y[i] in dict){
+  if (y[i] in dict && i>=count[1]){
   if (dict[y[i]]==0){
   dict[y[i]]=1;
   var temp=i;
