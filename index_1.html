@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h3>A demonstration of how to access a TEXTAREA element</h3>
+
+Text:<br>
+<textarea id="myTextarea">
+</textarea>
+<br>
+<button type="button" onclick="myFunction()">SubMit</button>
+
+<h1 id="demo"></h1>
+<h2 id="demoone"></h2>
+<strong id="demotwo"></strong>
+<p id="demothree"></p>
+<script>
+
+function getString(data,symb,temp_n){
+  sub_string=[]
+  var indx =temp_n+1
+  for (m=indx; m<data.length; m++){
+    if (data[m]!=symb){
+	sub_string.push(data[m]);
+	}
+    else if(data[m]===symb){
+      break;
+	}
+	}
+	if (symb==='#'){
+	document.getElementById("demo").innerHTML=sub_string;
+	}
+	else if(symb==='##'){
+	document.getElementById("demoone").innerHTML=sub_string;
+	}
+	else if(symb==='**'){
+	document.getElementById("demotwo").innerHTML=sub_string;
+	}
+	return m+1
+ }
+
+function myFunction() {
+  var symbol=[];
+  var dict = { '#': 0, '##': 0, '**': 0 };
+  var count = 0;
+  var x = document.getElementById("myTextarea").value;
+  var y = x.split(" ");
+  for (var i=0; i<y.length; i++) {
+  if (y[i] in dict){
+  if (dict[y[i]]==0){
+  dict[y[i]]=1;
+  var temp=i;
+  if (symbol.length>0){
+  document.getElementById("demothree").innerHTML=symbol;
+  symbol=[];
+  }
+  count=getString(y,y[i],temp);
+  }
+  else if(dict[y[i]]==1){
+  dict[y[i]]=0;
+  }
+  }
+  else if(i<count){
+  continue;
+  }
+  else if(i>=count){
+  symbol.push(y[i]);
+  }
+  }
+  if (symbol.length>0){
+  document.getElementById("demothree").innerHTML=symbol;
+  }
+  }
+</script>
+
+</body>
+</html>
