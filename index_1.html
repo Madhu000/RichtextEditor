@@ -44,12 +44,13 @@ function getString(data,symb,temp_n){
 	}
 	var new_text=sub_string.join(' ');
 	//document.write(m+1);
-	return [new_text,m+1];
+	return [new_text,m];
  }
 
 function myFunction() {
   var symbol=[];
   var dict = { '#': 0, '##': 0, '**': 0 };
+  //document.write("Dictionary before :" ,dict); 
   var x = document.getElementById("myTextarea").value;
   var y = x.split(" ");
   var count=[]
@@ -67,6 +68,7 @@ function myFunction() {
   }
   else if(dict[y[i]]==1){
   dict[y[i]]=0;
+  console.log("The reset dict",dict);
   }
   }
   else if(i<count[1]){
@@ -78,6 +80,7 @@ function myFunction() {
   }
   var whole_text=symbol.join(' ');
   //document.write(whole_text);
+  console.log(dict);
   document.getElementById("demothree").innerHTML=whole_text;
   }
 </script>
