@@ -8,19 +8,23 @@ Text:<br>
 <textarea id="myTextarea">
 </textarea>
 <br>
-<button type="button" onclick="myFunction()">SubMit</button>
+<button type="button" onclick="getString()">SubMit</button>
 
 <p id="demothree"></p>
+
+
+
+
+
 <script>
 
-function getString(data,symb,temp_n){
+
+function getSubstring(data,symb,temp_n){
   var indx=0;
   var sub_string=[];
   indx = (temp_n+1);
   var new_symb='';
-  /*document.write("The value new temporary variable is ",temp_n);
-  document.write("The value new updated temporary variable is ",(temp_n+1));
-  document.write("The value of indx is",indx);*/
+  
   if (symb==='#'){
 	sub_string.push('<h1>');
 	new_symb= '</h1>';
@@ -43,27 +47,28 @@ function getString(data,symb,temp_n){
 	}
 	}
 	var new_text=sub_string.join(' ');
-	//document.write(m+1);
+	
 	return [new_text,m];
  }
 
-function myFunction() {
+ 
+
+function getRichText(x) {
   var symbol=[];
   var dict = { '#': 0, '##': 0, '**': 0 };
-  //document.write("Dictionary before :" ,dict); 
-  var x = document.getElementById("myTextarea").value;
+  
   var y = x.split(" ");
   var count=[]
   count[1]=0;
   var text='';
-  //document.write("The length of the string is ",y.length);
+  
   for (var i=0; i<y.length; i++) {
   if (y[i] in dict && i>=count[1]){
   if (dict[y[i]]==0){
   dict[y[i]]=1;
   var temp=i;
-  //document.write("The value of temporary value is ",temp);
-  var count=getString(y,y[i],temp);
+  
+  var count=getSubstring(y,y[i],temp);
   symbol.push(count[0]);
   }
   else if(dict[y[i]]==1){
@@ -78,11 +83,19 @@ function myFunction() {
   symbol.push(y[i]);
   }
   }
-  var whole_text=symbol.join(' ');
-  //document.write(whole_text);
+  var full_text=symbol.join(' ');
+  
   console.log(dict);
-  document.getElementById("demothree").innerHTML=whole_text;
+  return full_text;
   }
+  
+  
+ function getString(){
+ var x = document.getElementById("myTextarea").value;
+ full_text= getRichText(x);
+ document.getElementById("demothree").innerHTML=full_text;
+}
+  
 </script>
 
 </body>
